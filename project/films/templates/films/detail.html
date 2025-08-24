@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block main %}
+<main>
+  <div class="d-flex justify-content-center mt-5 mb-5">
+    <div>
+      <div>
+        <div>
+          <div class="card">
+            {% if movie.photo %}
+
+            <img src="{{ movie.photo.url }}" class="card-img-top" alt="{{ movie.photo }}" />
+
+            {% else %}
+
+            <img src="{{ movie.photo.url }}" class="card-img-top"
+              alt="https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png" />
+
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.title }}</h5>
+              <h5>{{ movie.year }}</h5>
+              <p class="card-text">{{ movie.description }}</p>
+              <p class="card-text">{{ movie.genre }}</p>
+            </div>
+            <div class="container">
+              <div>
+                <small>{{ movie.views }} views</small>
+              </div>
+              <div class="container">
+                <a href="{% url 'index' %}">
+                  <button type="submit" style="border-radius: 5px; border: none; color: white; background-color: blue;">back</button>
+                </a>
+              {% if request.user.is_staff %}
+              <a href="{% url 'delete_movie' movie.pk %}" class="d-flex justify-content-center">
+                <button type="submit" style="border-radius: 5px; border: none; color: white; background-color: red;">detele</button>
+              </a>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock main %}

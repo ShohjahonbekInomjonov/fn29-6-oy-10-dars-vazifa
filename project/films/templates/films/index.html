@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block main %}
+<main>
+  <div class="d-flex justify-content-between mt-5 mb-5">
+    <div class="col-2">
+      <ul class="list-group list-group-light">
+        {% for genre in genres %}
+        <a href="{% url 'by_genre' genre.pk %}">
+          <li class="list-group-item px-3 border-0">{{ genre.name }}</li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for movie in movies %}
+        <div class="col">
+          <div class="card h-100">
+            {% if movie.photo %}
+            <a href="{% url 'detail' movie.pk %}">
+              <img
+                src="{{ movie.photo.url }}"
+                class="card-img-top"
+                alt="{{ movie.photo }}"
+              />
+            </a>
+            {% else %}
+            <a href="{% url 'detail' movie.pk %}">
+              <img
+                src="https://nftcalendar.io/storage/uploads/2022/02/21/image-not-found_0221202211372462137974b6c1a.png"
+                class="card-img-top"
+                alt="{{ movie.photo }}"
+              />
+            </a>
+            {% endif %}
+            <div class="card-body">
+              <a href="{% url 'detail' movie.pk %}">
+                <h5 class="card-title">{{ movie.title }}</h5>
+                <h5>{{ movie.year }}</h5>
+              </a>
+              <p class="card-text">{{ movie.description }}</p>
+              <p class="card-text">{{ movie.genre }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{ movie.views }} views</small><br>
+              {% if request.user.is_staff %}
+              <a href="{% url 'delete_movie' movie.pk %}" class="d-flex justify-content-center">
+                <button type="submit" style="border-radius: 5px; border: none; color: white; background-color: red;">detele</button>
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock main %}

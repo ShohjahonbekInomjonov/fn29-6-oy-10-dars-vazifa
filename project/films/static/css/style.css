@@ -1,0 +1,12 @@
+body{
+    background-color: azure;
+    justify-content: center;
+    align-items: center;
+}
+.my_container{
+    border: 5px solid deepskyblue;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}

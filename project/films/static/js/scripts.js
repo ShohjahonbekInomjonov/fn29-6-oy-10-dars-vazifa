@@ -1,0 +1,1 @@
+// alert("Siz bu saytga kirishni xohlaysizmi?")
